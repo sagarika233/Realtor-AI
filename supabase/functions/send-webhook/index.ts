@@ -15,7 +15,7 @@ serve(async (req: ServerRequest) => {
     const body = new TextDecoder().decode(req.body)
     const { fullName, phone, email, type, location } = JSON.parse(body)
 
-    const response = await fetch('https://hook.eu1.make.com/kawe9tmze44w9xjpdgfy92baeixenjbr', {
+    const response = await fetch('https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
