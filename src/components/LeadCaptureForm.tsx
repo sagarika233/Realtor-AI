@@ -45,23 +45,19 @@ const LeadCaptureForm = () => {
 
       if (error) throw error;
 
-      // Send data to webhook
+      // Send data to webhook via Supabase function
       try {
-        const response = await fetch('https://hook.eu1.make.com/kawe9tmze44w9xjpdgfy92baeixenjbr', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        const { error: webhookError } = await supabase.functions.invoke('send-webhook', {
+          body: {
             fullName: formData.fullName.trim(),
             phone: formData.phone.trim(),
             email: formData.email.trim() || null,
             type: formData.type,
             location: formData.location.trim(),
-          }),
+          }
         });
-        if (!response.ok) {
-          console.error('Webhook failed:', response.statusText);
+        if (webhookError) {
+          console.error('Webhook failed:', webhookError);
         }
       } catch (webhookError) {
         console.error('Webhook error:', webhookError);
