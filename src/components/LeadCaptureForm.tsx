@@ -36,11 +36,14 @@ const LeadCaptureForm = () => {
 
     try {
       const { error } = await supabase.from("leads").insert({
-        full_name: formData.fullName.trim(),
-        phone_number: formData.phone.trim(),
-        email: formData.email.trim() || null,
-        lead_type: formData.type as "buyer" | "seller",
-        preferred_location: formData.location.trim(),
+        name: formData.fullName.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        source: formData.type,
+        metadata: {
+          lead_type: formData.type,
+          preferred_location: formData.location.trim(),
+        },
       });
 
       if (error) throw error;
@@ -68,7 +71,7 @@ const LeadCaptureForm = () => {
       console.error("Error submitting lead:", error);
       toast({
         title: "Submission failed",
-        description: "Please try again or call us directly.",
+        description: `Error: ${error.message || 'Unknown error'}. Please try again or call us directly.`,
         variant: "destructive",
       });
     } finally {
