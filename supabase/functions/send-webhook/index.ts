@@ -1,7 +1,7 @@
 // @ts-ignore
-import { serve, ServerRequest } from "https://deno.land/std@0.168.0/http/server.ts"
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
-serve(async (req: ServerRequest) => {
+serve(async (req: Request) => {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -12,25 +12,31 @@ serve(async (req: ServerRequest) => {
   }
 
   try {
-    const body = new TextDecoder().decode(req.body)
-    const { fullName, phone, email, type, location } = JSON.parse(body)
+    const { fullName, phone, email, type, location } = await req.json()
+    console.log('Received webhook data:', { fullName, phone, email, type, location })
+
+    const webhookData = {
+      fullName,
+      phone,
+      email,
+      type,
+      location,
+    }
+    console.log('Sending to webhook:', webhookData)
 
     const response = await fetch('https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        fullName,
-        phone,
-        email,
-        type,
-        location,
-      }),
+      body: JSON.stringify(webhookData),
     })
 
+    console.log('Webhook response status:', response.status)
+    console.log('Webhook response text:', await response.text())
+
     if (!response.ok) {
-      throw new Error(`Webhook failed: ${response.statusText}`)
+      throw new Error(`Webhook failed: ${response.status} ${response.statusText}`)
     }
 
     return new Response(JSON.stringify({ success: true }), {
