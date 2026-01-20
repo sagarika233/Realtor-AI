@@ -50,7 +50,15 @@ const LeadCaptureForm = () => {
 
       // Send data to webhook via Supabase function
       try {
-        const { error: webhookError } = await supabase.functions.invoke('send-webhook', {
+        console.log('Invoking webhook with data:', {
+          fullName: formData.fullName.trim(),
+          phone: formData.phone.trim(),
+          email: formData.email.trim() || null,
+          type: formData.type,
+          location: formData.location.trim(),
+        });
+
+        const { data: webhookData, error: webhookError } = await supabase.functions.invoke('send-webhook', {
           body: {
             fullName: formData.fullName.trim(),
             phone: formData.phone.trim(),
@@ -59,11 +67,26 @@ const LeadCaptureForm = () => {
             location: formData.location.trim(),
           }
         });
+
+        console.log('Webhook response:', { data: webhookData, error: webhookError });
+
         if (webhookError) {
           console.error('Webhook failed:', webhookError);
+          toast({
+            title: "Webhook failed",
+            description: `Webhook error: ${webhookError.message || 'Unknown error'}`,
+            variant: "destructive",
+          });
+        } else {
+          console.log('Webhook succeeded:', webhookData);
         }
       } catch (webhookError) {
-        console.error('Webhook error:', webhookError);
+        console.error('Webhook exception:', webhookError);
+        toast({
+          title: "Webhook error",
+          description: `Exception: ${webhookError.message || 'Unknown error'}`,
+          variant: "destructive",
+        });
       }
 
       setIsSubmitted(true);
