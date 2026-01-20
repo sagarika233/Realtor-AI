@@ -33,10 +33,16 @@ serve(async (req: Request) => {
     })
 
     console.log('Webhook response status:', response.status)
-    console.log('Webhook response text:', await response.text())
+    const responseText = await response.text()
+    console.log('Webhook response text:', responseText)
 
+    // Always return success to the client, even if webhook fails
+    // Log the webhook failure but don't throw an error
     if (!response.ok) {
-      throw new Error(`Webhook failed: ${response.status} ${response.statusText}`)
+      console.error(`Webhook failed: ${response.status} ${response.statusText} - ${responseText}`)
+      // Still return success to client since data was processed
+    } else {
+      console.log('Webhook succeeded')
     }
 
     return new Response(JSON.stringify({ success: true }), {
