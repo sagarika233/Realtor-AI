@@ -77,6 +77,13 @@ const LeadCaptureForm = () => {
             description: `Webhook error: ${webhookError.message || 'Unknown error'}`,
             variant: "destructive",
           });
+        } else if (webhookData && webhookData.success === false) {
+          console.error('Webhook function error:', webhookData.error);
+          toast({
+            title: "Webhook error",
+            description: `Function error: ${webhookData.error || 'Unknown error'}`,
+            variant: "destructive",
+          });
         } else {
           console.log('Webhook succeeded:', webhookData);
         }
