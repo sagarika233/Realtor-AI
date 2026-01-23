@@ -25,13 +25,19 @@ serve(async (req: Request) => {
     console.log('Sending to webhook:', webhookData)
 
     try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
       const response = await fetch('https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(webhookData),
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
 
       console.log('Webhook response status:', response.status)
       const responseText = await response.text()
