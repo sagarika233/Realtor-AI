@@ -24,26 +24,22 @@ serve(async (req: Request) => {
     }
     console.log('Sending to webhook:', webhookData)
 
-    // Send data to the webhook URL with timeout
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
-
-    const webhookResponse = await fetch('https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x', {
+    // Send data to the webhook URL asynchronously to prevent timeout
+    fetch('https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(webhookData),
-      signal: controller.signal,
+    }).then(response => {
+      if (!response.ok) {
+        console.error(`Webhook request failed with status: ${response.status}`)
+      } else {
+        console.log('Webhook call successful')
+      }
+    }).catch(error => {
+      console.error('Error sending webhook:', error)
     })
-
-    clearTimeout(timeoutId)
-
-    if (!webhookResponse.ok) {
-      throw new Error(`Webhook request failed with status: ${webhookResponse.status}`)
-    }
-
-    console.log('Webhook call successful')
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
