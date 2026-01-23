@@ -24,14 +24,20 @@ serve(async (req: Request) => {
     }
     console.log('Sending to webhook:', webhookData)
 
-    // Send data to the webhook URL
+    // Send data to the webhook URL with timeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
     const webhookResponse = await fetch('https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(webhookData),
+      signal: controller.signal,
     })
+
+    clearTimeout(timeoutId)
 
     if (!webhookResponse.ok) {
       throw new Error(`Webhook request failed with status: ${webhookResponse.status}`)
