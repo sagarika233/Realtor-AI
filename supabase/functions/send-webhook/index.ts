@@ -36,6 +36,7 @@ serve(async (req: Request) => {
       })
 
       try {
+        console.log('Attempting to send to webhook URL:', webhookUrl)
         const webhookResponse = await Promise.race([
           fetch(webhookUrl, {
             method: 'POST',
@@ -47,17 +48,33 @@ serve(async (req: Request) => {
           timeoutPromise
         ]) as Response
 
+        console.log('Webhook response status:', webhookResponse.status)
+        console.log('Webhook response headers:', Object.fromEntries(webhookResponse.headers.entries()))
+
         if (!webhookResponse.ok) {
           success = false
           errorMessage = `Webhook failed with status: ${webhookResponse.status}`
           console.error('Webhook response not ok:', errorMessage)
+          try {
+            const responseText = await webhookResponse.text()
+            console.error('Webhook response body:', responseText)
+          } catch (e) {
+            console.error('Could not read response body')
+          }
         } else {
           console.log('Webhook sent successfully')
+          try {
+            const responseText = await webhookResponse.text()
+            console.log('Webhook response body:', responseText)
+          } catch (e) {
+            console.log('Could not read response body')
+          }
         }
       } catch (fetchError) {
         success = false
         errorMessage = fetchError instanceof Error ? fetchError.message : 'Unknown fetch error'
         console.error('Webhook fetch error:', errorMessage)
+        console.error('Error details:', fetchError)
       }
     } catch (error) {
       success = false
@@ -67,7 +84,7 @@ serve(async (req: Request) => {
 
     return new Response(JSON.stringify({ success, error: errorMessage }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: success ? 200 : 400,
+      status: 200,
     })
   } catch (unhandledError) {
     console.error('Unhandled error in function:', unhandledError)
