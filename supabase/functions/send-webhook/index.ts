@@ -94,11 +94,9 @@ serve(async (req: Request) => {
       console.error('Error in send-webhook function:', errorMessage)
     }
 
-    // Return appropriate status based on webhook success
-    const responseStatus = success ? 200 : 400
     return new Response(JSON.stringify({ success, error: errorMessage }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: responseStatus,
+      status: 200,
     })
   } catch (unhandledError) {
     console.error('Unhandled error in function:', unhandledError)
