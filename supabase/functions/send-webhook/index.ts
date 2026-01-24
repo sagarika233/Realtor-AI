@@ -32,51 +32,61 @@ serve(async (req: Request) => {
 
       const webhookUrl = 'https://hook.eu1.make.com/84kof5h6f9qy14edqutbabkvmpe5pgst'
 
-      // Add timeout to prevent function timeout
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => reject(new Error('Timeout')), 5000) // 5 second timeout
-      })
-
       try {
         console.log('Attempting to send to webhook URL:', webhookUrl)
-        const webhookResponse = await Promise.race([
-          fetch(webhookUrl, {
+
+        // Use a shorter timeout for webhook calls
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
+
+        try {
+          const webhookResponse = await fetch(webhookUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'User-Agent': 'RealtorAI-Webhook/1.0',
             },
             body: JSON.stringify(webhookData),
-          }),
-          timeoutPromise
-        ]) as Response
+            signal: controller.signal,
+          })
 
-        console.log('Webhook response status:', webhookResponse.status)
-        console.log('Webhook response headers:', Object.fromEntries(webhookResponse.headers.entries()))
+          clearTimeout(timeoutId)
 
-        if (!webhookResponse.ok) {
+          console.log('Webhook response status:', webhookResponse.status)
+          console.log('Webhook response headers:', Object.fromEntries(webhookResponse.headers.entries()))
+
+          // Make.com webhooks typically return 200 for success
+          if (webhookResponse.status >= 200 && webhookResponse.status < 300) {
+            success = true
+            console.log('Webhook sent successfully')
+            try {
+              const responseText = await webhookResponse.text()
+              console.log('Webhook response body:', responseText)
+            } catch (e) {
+              console.log('Could not read response body')
+            }
+          } else {
+            success = false
+            errorMessage = `Webhook failed with status: ${webhookResponse.status}`
+            console.error('Webhook response not ok:', errorMessage)
+            try {
+              const responseText = await webhookResponse.text()
+              console.error('Webhook response body:', responseText)
+            } catch (e) {
+              console.error('Could not read response body')
+            }
+          }
+        } catch (fetchError) {
+          clearTimeout(timeoutId)
           success = false
-          errorMessage = `Webhook failed with status: ${webhookResponse.status}`
-          console.error('Webhook response not ok:', errorMessage)
-          try {
-            const responseText = await webhookResponse.text()
-            console.error('Webhook response body:', responseText)
-          } catch (e) {
-            console.error('Could not read response body')
-          }
-        } else {
-          console.log('Webhook sent successfully')
-          try {
-            const responseText = await webhookResponse.text()
-            console.log('Webhook response body:', responseText)
-          } catch (e) {
-            console.log('Could not read response body')
-          }
+          errorMessage = fetchError instanceof Error ? fetchError.message : 'Unknown fetch error'
+          console.error('Webhook fetch error:', errorMessage)
+          console.error('Error details:', fetchError)
         }
-      } catch (fetchError) {
+      } catch (error) {
         success = false
-        errorMessage = fetchError instanceof Error ? fetchError.message : 'Unknown fetch error'
-        console.error('Webhook fetch error:', errorMessage)
-        console.error('Error details:', fetchError)
+        errorMessage = error instanceof Error ? error.message : 'Unknown error'
+        console.error('Error in webhook setup:', errorMessage)
       }
     } catch (error) {
       success = false
@@ -84,9 +94,11 @@ serve(async (req: Request) => {
       console.error('Error in send-webhook function:', errorMessage)
     }
 
+    // Return appropriate status based on webhook success
+    const responseStatus = success ? 200 : 400
     return new Response(JSON.stringify({ success, error: errorMessage }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 200,
+      status: responseStatus,
     })
   } catch (unhandledError) {
     console.error('Unhandled error in function:', unhandledError)
