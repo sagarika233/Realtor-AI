@@ -58,23 +58,34 @@ const LeadCaptureForm = () => {
           location: formData.location.trim(),
         });
 
-        const { data: webhookData, error: webhookError } = await supabase.functions.invoke('send-webhook', {
-          body: {
+        const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+        const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/send-webhook`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'apikey': SUPABASE_ANON_KEY,
+          },
+          body: JSON.stringify({
             fullName: formData.fullName.trim(),
             phone: formData.phone.trim(),
             email: formData.email.trim() || null,
             type: formData.type,
             location: formData.location.trim(),
-          }
+          }),
         });
 
-        console.log('Webhook response:', { data: webhookData, error: webhookError });
+        const webhookData = await response.json();
 
-        if (webhookError) {
-          console.error('Webhook failed:', webhookError);
+        console.log('Webhook response:', { status: response.status, data: webhookData });
+
+        if (!response.ok) {
+          console.error('Webhook failed with status:', response.status);
           toast({
             title: "Webhook failed",
-            description: `Webhook error: ${webhookError.message || 'Unknown error'}`,
+            description: `HTTP ${response.status}: ${webhookData?.error || 'Unknown error'}`,
             variant: "destructive",
           });
         } else if (webhookData && webhookData.success === false) {
