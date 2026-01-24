@@ -1,5 +1,5 @@
 // @ts-ignore
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
 
 serve(async (req: Request) => {
   const corsHeaders = {
