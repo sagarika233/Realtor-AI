@@ -31,20 +31,21 @@ serve(async (req: Request) => {
       const webhookUrl = 'https://hook.eu1.make.com/84kof5h6f9qy14edqutbabkvmpe5pgst'
 
       // Add timeout to prevent function timeout
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error('Timeout')), 5000) // 5 second timeout
+      })
 
       try {
-        const webhookResponse = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(webhookData),
-          signal: controller.signal,
-        })
-
-        clearTimeout(timeoutId)
+        const webhookResponse = await Promise.race([
+          fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(webhookData),
+          }),
+          timeoutPromise
+        ]) as Response
 
         if (!webhookResponse.ok) {
           success = false
@@ -54,7 +55,6 @@ serve(async (req: Request) => {
           console.log('Webhook sent successfully')
         }
       } catch (fetchError) {
-        clearTimeout(timeoutId)
         success = false
         errorMessage = fetchError instanceof Error ? fetchError.message : 'Unknown fetch error'
         console.error('Webhook fetch error:', errorMessage)
@@ -67,7 +67,7 @@ serve(async (req: Request) => {
 
     return new Response(JSON.stringify({ success, error: errorMessage }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 200,
+      status: success ? 200 : 400,
     })
   } catch (unhandledError) {
     console.error('Unhandled error in function:', unhandledError)
