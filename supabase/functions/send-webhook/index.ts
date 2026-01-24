@@ -28,7 +28,7 @@ serve(async (req: Request) => {
       }
       console.log('Sending to webhook:', webhookData)
 
-      const webhookUrl = 'https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x'
+      const webhookUrl = 'https://hook.eu1.make.com/84kof5h6f9qy14edqutbabkvmpe5pgst'
 
       // Add timeout to prevent function timeout
       const controller = new AbortController()
