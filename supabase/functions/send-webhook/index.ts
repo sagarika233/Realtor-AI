@@ -25,6 +25,8 @@ serve(async (req: Request) => {
         email,
         type,
         location,
+        timestamp: new Date().toISOString(),
+        source: 'realtor_ai_lead_form'
       }
       console.log('Sending to webhook:', webhookData)
 
