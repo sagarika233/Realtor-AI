@@ -32,7 +32,7 @@ serve(async (req: Request) => {
 
       // Add timeout to prevent function timeout
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
 
       try {
         const webhookResponse = await fetch(webhookUrl, {
