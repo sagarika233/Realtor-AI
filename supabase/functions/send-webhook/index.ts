@@ -30,7 +30,7 @@ serve(async (req: Request) => {
       }
       console.log('Sending to webhook:', webhookData)
 
-      const webhookUrl = 'https://hook.eu1.make.com/pkqm196924unp1rfzw2n7o70i4i9ae6x'
+      const webhookUrl = 'https://hook.eu1.make.com/ahsnhof0i9137fay4s67b28xhnawjsui'
 
       try {
         console.log('Attempting to send to webhook URL:', webhookUrl)
