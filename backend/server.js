@@ -11,8 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Integrations
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-const slackClient = new WebClient(process.env.SLACK_BOT_TOKEN);
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.error("CRITICAL ERROR: SUPABASE_URL or SUPABASE_ANON_KEY is missing from environment variables.");
+    process.exit(1);
+}
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const slackClient = SLACK_BOT_TOKEN ? new WebClient(SLACK_BOT_TOKEN) : null;
 
 // Step 1: Receive Form Webhook and Trigger AI Call
 app.post('/webhook/new-lead', async (req, res) => {
