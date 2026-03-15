@@ -11,12 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Integrations
+console.log("Environment Keys Available:", Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET') && !k.includes('TOKEN'))); 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error("CRITICAL ERROR: SUPABASE_URL or SUPABASE_ANON_KEY is missing from environment variables.");
+    console.error(`CRITICAL ERROR: SUPABASE_URL (${SUPABASE_URL ? 'PRESENT' : 'MISSING'}) or SUPABASE_ANON_KEY (${SUPABASE_ANON_KEY ? 'PRESENT' : 'MISSING'}) is missing.`);
     process.exit(1);
 }
 
