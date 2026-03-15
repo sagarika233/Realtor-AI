@@ -14,22 +14,35 @@ app.use(express.json());
 console.log("--- DEBUG: ENVIRONMENT CHECK ---");
 const allKeys = Object.keys(process.env);
 console.log(`Total Env Keys Found: ${allKeys.length}`);
-console.log("Keys starting with VITE_:", allKeys.filter(k => k.startsWith('VITE_')));
-console.log("Is SUPABASE_URL found?:", allKeys.includes('SUPABASE_URL'));
-console.log("Is SUPABASE_ANON_KEY found?:", allKeys.includes('SUPABASE_ANON_KEY'));
-console.log("--------------------------------");
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+// Auto-detect VITE_ prefixes (common mistake)
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error(`ERROR: Missing critical keys. URL: ${SUPABASE_URL ? 'PRESENT' : 'MISSING'}, KEY: ${SUPABASE_ANON_KEY ? 'PRESENT' : 'MISSING'}`);
-    process.exit(1);
+    console.warn("⚠️ WARNING: SUPABASE_URL or SUPABASE_ANON_KEY is missing.");
+    console.warn("The server will start, but database features will fail.");
+} else {
+    console.log("✅ Supabase credentials detected.");
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = (SUPABASE_URL && SUPABASE_ANON_KEY) ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 const slackClient = SLACK_BOT_TOKEN ? new WebClient(SLACK_BOT_TOKEN) : null;
+
+// Health Check Endpoint
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'online',
+        supabase_connected: !!supabase,
+        vars_found: {
+            SUPABASE_URL: !!process.env.SUPABASE_URL,
+            VITE_SUPABASE_URL: !!process.env.VITE_SUPABASE_URL,
+            SUPABASE_ANON_KEY: !!process.env.SUPABASE_ANON_KEY,
+            VITE_SUPABASE_ANON_KEY: !!process.env.VITE_SUPABASE_ANON_KEY
+        }
+    });
+});
 
 // Step 1: Receive Form Webhook and Trigger AI Call
 app.post('/webhook/new-lead', async (req, res) => {
