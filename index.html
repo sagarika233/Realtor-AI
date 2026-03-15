@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtor AI - Instant AI Real Estate Agent</title>
+    <meta name="description"
+        content="Realtor AI calls your leads within seconds, qualifies them, and books appointments 24/7.">
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Accents -->
+    <div class="bg-glow top-left"></div>
+    <div class="bg-glow bottom-right"></div>
+    <div class="bg-glow center-right"></div>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Realtor <span>AI</span></div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="#lead-capture" class="btn btn-primary">Get Your AI Agent</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge">🚀 Meet your new AI closer</div>
+                    <h1>Turn Website Visitors Into <span class="text-gradient">Qualified Real Estate Phone Leads</span>
+                        Automatically</h1>
+                    <p>Realtor AI calls your leads within seconds, qualifies them, and books appointments 24/7.</p>
+                    <div class="hero-buttons">
+                        <a href="#demo" class="btn btn-primary btn-large">See Realtor AI in Action <i
+                                class="fa-solid fa-play"></i></a>
+                        <a href="#lead-capture" class="btn btn-secondary btn-large">Get Your AI Agent</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="glass-container">
+                        <img src="hero_phone_mockup.png" alt="3D phone mockup showing AI calling a real estate lead"
+                            id="hero-img">
+
+                        <div class="floating-badge badge-1">
+                            <i class="fa-solid fa-phone-volume"></i> Calling Lead...
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <i class="fa-regular fa-calendar-check"></i> Appointment Booked
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything You Need to <span class="text-gradient">Close More Deals</span></h2>
+                    <p>Replace your manual calling process with an AI that never sleeps, never takes days off, and never
+                        forgets to follow up.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <h3>Instant AI Phone Calls</h3>
+                        <p>Speed to lead is everything. We call your leads within 5 seconds of form submission.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-filter"></i></div>
+                        <h3>Lead Qualification</h3>
+                        <p>AI asks the right questions: budget, timeline, location, and property type.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-regular fa-calendar-plus"></i></div>
+                        <h3>Appointment Booking</h3>
+                        <p>Automatically schedules verified leads directly onto your calendar.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3>CRM Integration</h3>
+                        <p>Seamlessly syncs with your favorite real estate CRMs instantly.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-clock"></i></div>
+                        <h3>24/7 Lead Response</h3>
+                        <p>Never miss a lead outside of business hours. We qualify them round the clock.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Call Transcripts & Analytics</h3>
+                        <p>Full recordings, transcripts, and insights available for every AI conversation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How <span class="text-gradient">Realtor AI</span> Works</h2>
+                    <p>A fully automated pipeline straight to your calendar.</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-step glass-panel">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Visitor Fills Form</h3>
+                            <p>A potential buyer or seller submits a form on your existing website or landing page.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step glass-panel">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Lead Stored & Triggered</h3>
+                            <p>The lead is instantly stored in the Supabase database, and Make.com automation is
+                                triggered.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step glass-panel">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Instant AI Call</h3>
+                            <p>The AI calling agent dials the lead within seconds, sounding just like a human assistant.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-step glass-panel">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Lead Qualification</h3>
+                            <p>It asks qualifying questions specific to their real estate needs natively over the phone.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-step glass-panel">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Appointment Booked</h3>
+                            <p>Qualified, high-intent leads are successfully booked directly to your agent\'s calendar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section: Listen to Real Calls -->
+        <section id="demo" class="demo">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Listen to <span class="text-gradient">Real AI Calls</span></h2>
+                    <p>Hear exactly how our AI handles different real estate scenarios with human-like latency and
+                        intelligence.</p>
+                </div>
+
+                <div class="demo-wrapper glass-panel">
+                    <!-- Demo Tabs -->
+                    <div class="demo-tabs">
+                        <button class="demo-tab active" data-call="buyer">
+                            <i class="fa-solid fa-house"></i> Buyer Qualification
+                        </button>
+                        <button class="demo-tab" data-call="seller">
+                            <i class="fa-solid fa-sign-hanging"></i> Listing Appointment
+                        </button>
+                        <button class="demo-tab" data-call="followup">
+                            <i class="fa-solid fa-phone-arrow-right"></i> Cold Follow-Up
+                        </button>
+                    </div>
+
+                    <!-- Audio Player Interface -->
+                    <div class="demo-player-container">
+                        <div class="audio-player">
+                            <div class="audio-visualizer">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                            <div class="audio-controls">
+                                <button class="play-btn"><i class="fa-solid fa-play"></i></button>
+                                <div class="progress-container">
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <span class="time">0:00 / <span id="demo-duration">1:24</span></span>
+                            </div>
+                            <div class="transcript-preview">
+                                <p id="demo-transcript"><strong>AI:</strong> "Hi, this is Sarah with the real estate
+                                    team. I saw you just registered on our site looking at homes in Austin. Are you
+                                    looking to make a move soon?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies Section -->
+        <section id="case-studies" class="case-studies">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Proven Results from <span class="text-gradient">Top Producers</span></h2>
+                    <p>See how Realtor AI is transforming lead conversion across the country.</p>
+                </div>
+                <div class="case-grid">
+                    <div class="case-card glass-panel">
+                        <div class="case-metric-large">+312%</div>
+                        <h3>Increase in Appointments</h3>
+                        <p>The Johnson Team deployed Realtor AI on their Zillow leads and saw triple the booked
+                            appointments within 30 days simply by dropping response time to 5 seconds.</p>
+                        <div class="case-author">The Johnson Team • Austin, TX</div>
+                    </div>
+                    <div class="case-card glass-panel featured">
+                        <div class="case-metric-large">$42k</div>
+                        <h3>Extra GCI in Month 1</h3>
+                        <p>"We had thousands of cold leads sitting in our CRM doing nothing. Realtor AI called 2,000 of
+                            them in a weekend, found 14 hot buyers, and closed 3 of them that month."</p>
+                        <div class="case-author">Premier Realty • Miami, FL</div>
+                    </div>
+                    <div class="case-card glass-panel">
+                        <div class="case-metric-large">45 hrs</div>
+                        <h3>Saved Per Agent / Month</h3>
+                        <p>No more manual dialing or leaving voicemails. Agents now only talk to highly qualified leads
+                            who show up directly on their Google Calendar.</p>
+                        <div class="case-author">Elevation Brokers • Denver, CO</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Top Agents Say About <span class="text-gradient">Realtor AI</span></h2>
+                    <p>Discover how Realtor AI is transforming the real estate industry by converting leads on
+                        autopilot.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card glass-panel">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="quote">"Realtor AI has essentially cloned my best ISA. It booked 5 appointments for me
+                            this weekend while I was out showing homes to other clients!"</p>
+                        <div class="author">
+                            <div class="avatar" style="background-color: var(--primary);">SA</div>
+                            <div>
+                                <h4>Sarah Anderson</h4>
+                                <p>Top 1% Broker</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-panel">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="quote">"Speed to lead used to be my biggest struggle. Now, every Zillow lead gets
+                            called within 5 seconds and perfectly qualified before I even check my phone."</p>
+                        <div class="author">
+                            <div class="avatar" style="background-color: var(--secondary);">MJ</div>
+                            <div>
+                                <h4>Michael Johnson</h4>
+                                <p>Team Leader</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-panel">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="quote">"The call transcripts and analytics are a game changer. I listen to the
+                            recordings, and the AI frankly sounds better than humans on most days."</p>
+                        <div class="author">
+                            <div class="avatar" style="background-color: var(--accent);">DP</div>
+                            <div>
+                                <h4>David Patel</h4>
+                                <p>Real Estate Investor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lead Capture Form Section -->
+        <section id="lead-capture" class="lead-capture">
+            <div class="container">
+                <div class="lead-capture-wrapper glass-panel">
+                    <div class="form-content">
+                        <h2>Experience the <span class="text-gradient">Magic</span> Yourself</h2>
+                        <p>Fill out the form below and our AI will call you back instantly to demonstrate its
+                            qualification process.</p>
+                    </div>
+                    <form class="capture-form" id="demo-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="intent">Interest</label>
+                                <select id="intent" required>
+                                    <option value="Buy">Buy</option>
+                                    <option value="Sell">Sell</option>
+                                    <option value="Rent">Rent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="property_type">Property Type</label>
+                                <select id="property_type">
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="House">House</option>
+                                    <option value="Condo">Condo</option>
+                                    <option value="Land">Land</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Budget</label>
+                                <select id="budget">
+                                    <option value="$100k – $300k">$100k – $300k</option>
+                                    <option value="$300k – $500k" selected>$300k – $500k</option>
+                                    <option value="$500k – $800k">$500k – $800k</option>
+                                    <option value="$800k+">$800k+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferred_location">Preferred Location</label>
+                            <input type="text" id="preferred_location" placeholder="City, Neighborhood, or Zip Code">
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">Buying Timeline</label>
+                            <select id="timeline">
+                                <option value="Immediately">Immediately</option>
+                                <option value="1–3 months" selected>1–3 Months</option>
+                                <option value="3–6 months">3–6 Months</option>
+                                <option value="Just exploring">Just exploring</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Get an Instant AI Call<i
+                                class="fa-solid fa-phone"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple, <span class="text-gradient">Transparent Pricing</span></h2>
+                    <p>Simple pricing — one-time setup and monthly AI automation support.</p>
+                </div>
+                <!-- ... pricing cards ... -->
+                <div class="pricing-grid">
+                    <div class="pricing-card glass-panel">
+                        <h3>Starter</h3>
+                        <p class="pricing-desc">Perfect for solo real estate agents getting started with AI lead
+                            qualification.</p>
+                        <div class="setup-fee">$500 Setup Fee</div>
+                        <div class="price"><span>$</span>99<span>/mo</span></div>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-check"></i> AI Voice Agent Setup</li>
+                            <li><i class="fa-solid fa-check"></i> 100 AI Calls per month</li>
+                            <li><i class="fa-solid fa-check"></i> Lead Qualification Questions</li>
+                            <li><i class="fa-solid fa-check"></i> SMS Follow-up Automation</li>
+                            <li><i class="fa-solid fa-check"></i> Basic CRM Integration</li>
+                            <li><i class="fa-solid fa-check"></i> Email Support</li>
+                        </ul>
+                        <a href="#lead-capture" class="btn btn-secondary btn-block">Start Setup</a>
+                    </div>
+                    <div class="pricing-card glass-panel featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Pro</h3>
+                        <p class="pricing-desc">Designed for growing real estate teams handling higher lead volume.</p>
+                        <div class="setup-fee">$1500 Setup Fee</div>
+                        <div class="price"><span>$</span>299<span>/mo</span></div>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-check"></i> Everything in Starter</li>
+                            <li><i class="fa-solid fa-check"></i> 500 AI Calls per month</li>
+                            <li><i class="fa-solid fa-check"></i> Live Call Transfer to Agent</li>
+                            <li><i class="fa-solid fa-check"></i> Smart Lead Qualification</li>
+                            <li><i class="fa-solid fa-check"></i> CRM Integration</li>
+                            <li><i class="fa-solid fa-check"></i> Appointment Booking Automation</li>
+                            <li><i class="fa-solid fa-check"></i> Priority Support</li>
+                        </ul>
+                        <a href="#lead-capture" class="btn btn-primary btn-block">Upgrade to Pro</a>
+                    </div>
+                    <div class="pricing-card glass-panel">
+                        <h3>Enterprise</h3>
+                        <p class="pricing-desc">Built for brokerages and large real estate teams.</p>
+                        <div class="setup-fee">Custom Setup</div>
+                        <div class="price">Custom</div>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-check"></i> Unlimited AI Calls</li>
+                            <li><i class="fa-solid fa-check"></i> Multi-language AI Agents</li>
+                            <li><i class="fa-solid fa-check"></i> Dedicated AI Agent Training</li>
+                            <li><i class="fa-solid fa-check"></i> Custom Integrations</li>
+                            <li><i class="fa-solid fa-check"></i> Advanced Analytics Dashboard</li>
+                            <li><i class="fa-solid fa-check"></i> Dedicated Account Manager</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary btn-block">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator Section -->
+        <section id="roi" class="roi-calculator">
+            <div class="container">
+                <div class="section-header">
+                    <h2>See How Much Revenue <span class="text-gradient">Realtor AI</span> Can Generate</h2>
+                    <p>Estimate how much additional revenue you could close by using AI to instantly answer and qualify
+                        every lead.</p>
+                </div>
+
+                <div class="calc-wrapper glass-panel roi-card-glowing">
+                    <div class="calc-inputs">
+                        <div class="range-group">
+                            <label for="leads-slider">Monthly Leads</label>
+                            <div class="slider-val-display"><span id="leads-val">100</span></div>
+                            <input type="range" id="leads-slider" min="10" max="1000" step="10" value="100"
+                                class="styled-slider">
+                        </div>
+                        <div class="range-group mt-4">
+                            <label for="price-slider">Average Home Price</label>
+                            <div class="slider-val-display">$<span id="price-val">500,000</span></div>
+                            <input type="range" id="price-slider" min="100000" max="2000000" step="50000" value="500000"
+                                class="styled-slider">
+                        </div>
+                        <div class="grid-2 mt-4">
+                            <div class="range-group">
+                                <label for="comm-slider">Commission (%)</label>
+                                <div class="slider-val-display"><span id="comm-val">2.5</span>%</div>
+                                <input type="range" id="comm-slider" min="1" max="6" step="0.1" value="2.5"
+                                    class="styled-slider">
+                            </div>
+                            <div class="range-group">
+                                <label for="conv-slider">Conv. Rate (%)</label>
+                                <div class="slider-val-display"><span id="conv-val">2</span>%</div>
+                                <input type="range" id="conv-slider" min="0.5" max="10" step="0.5" value="2"
+                                    class="styled-slider">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-results">
+                        <div class="result-item">
+                            <span>Potential Deals Closed</span>
+                            <div class="number"><span id="deals-val-res">2</span> /mo</div>
+                        </div>
+                        <div class="result-item">
+                            <span>Estimated Monthly Commission</span>
+                            <div class="number">$<span id="comm-val-res">25,000</span></div>
+                        </div>
+                        <div class="result-item highlight">
+                            <span>Revenue Generated with Realtor AI</span>
+                            <div class="number text-gradient">$<span id="total-revenue">62,500</span></div>
+                        </div>
+                        <p class="calc-note">"Agents using Realtor AI respond instantly and typically convert 2–3x more
+                            leads."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta">
+            <div class="container">
+                <div class="cta-banner glass-panel">
+                    <h2>Never miss another real estate lead again.</h2>
+                    <p>Join hundreds of top producers converting leads while they sleep.</p>
+                    <a href="#lead-capture" class="btn btn-primary btn-large">Start Your AI Agent</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">Realtor <span>AI</span></div>
+                    <p>The definitive AI calling solution for real estate professionals.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#">Login</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Realtor AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
