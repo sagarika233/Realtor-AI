@@ -11,7 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Integrations
-console.log("Environment Keys Available:", Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET') && !k.includes('TOKEN'))); 
+console.log("Debug: Checking for VITE_ prefixes:", Object.keys(process.env).filter(k => k.startsWith('VITE_')));
+console.log("Debug: All keys (sanitized):", Object.keys(process.env).map(k => k.length > 5 ? k.substring(0, 5) + '...' : k));
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
