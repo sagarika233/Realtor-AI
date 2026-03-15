@@ -11,14 +11,20 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Integrations
-console.log("Debug: Checking for VITE_ prefixes:", Object.keys(process.env).filter(k => k.startsWith('VITE_')));
-console.log("Debug: All keys (sanitized):", Object.keys(process.env).map(k => k.length > 5 ? k.substring(0, 5) + '...' : k));
+console.log("--- DEBUG: ENVIRONMENT CHECK ---");
+const allKeys = Object.keys(process.env);
+console.log(`Total Env Keys Found: ${allKeys.length}`);
+console.log("Keys starting with VITE_:", allKeys.filter(k => k.startsWith('VITE_')));
+console.log("Is SUPABASE_URL found?:", allKeys.includes('SUPABASE_URL'));
+console.log("Is SUPABASE_ANON_KEY found?:", allKeys.includes('SUPABASE_ANON_KEY'));
+console.log("--------------------------------");
+
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error(`CRITICAL ERROR: SUPABASE_URL (${SUPABASE_URL ? 'PRESENT' : 'MISSING'}) or SUPABASE_ANON_KEY (${SUPABASE_ANON_KEY ? 'PRESENT' : 'MISSING'}) is missing.`);
+    console.error(`ERROR: Missing critical keys. URL: ${SUPABASE_URL ? 'PRESENT' : 'MISSING'}, KEY: ${SUPABASE_ANON_KEY ? 'PRESENT' : 'MISSING'}`);
     process.exit(1);
 }
 
